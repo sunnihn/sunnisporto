@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunni Hanifah | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --primary: #0066cc;
+            --highlight: #fffb00;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --dark: #1a1a1a;
+            --gray: #e6e6e6;
+            --dark-gray: #333333;
+            
+            /* Cursor variables */
+            --cursor-color: var(--highlight);
+            --cursor-size: 32px;
+            --outline-color: #FFA500;
+            --outline-width: 4px;
+            --outline-jaggedness: 3px;
+        }
+
+        .dark-mode {
+            --cursor-color: #F5F5F5;
+            --outline-color: #AAAAAA;
+        }
+
+        /* ===== BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none !important;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            color: var(--dark);
+            background-color: var(--white);
+            line-height: 1.8;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        .dark-mode {
+            background-color: var(--dark);
+            color: var(--white);
+        }
+
+        /* ===== CUSTOM CURSOR STYLES ===== */
+        .cursor {
+            position: fixed;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border-radius: 50%;
+            background: var(--cursor-color);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s, width 0.3s, height 0.3s;
+        }
+
+        .cursor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: calc(100% + var(--outline-width) * 2 + var(--outline-jaggedness) * 2);
+            height: calc(100% + var(--outline-width) * 2 + var(--outline-jaggedness) * 2);
+            background: var(--outline-color);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: -1;
+            clip-path: polygon(
+                0% 20%, 10% 15%, 20% 20%, 30% 10%, 40% 20%,
+                50% 5%, 60% 20%, 70% 15%, 80% 25%, 90% 10%,
+                100% 20%, 90% 30%, 80% 25%, 70% 35%, 60% 30%,
+                50% 35%, 40% 30%, 30% 40%, 20% 30%, 10% 35%,
+                0% 30%
+            );
+            animation: rotateOutline 4s infinite linear;
+        }
+
+        .cursor::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: calc(var(--cursor-size) * 1.8);
+            height: calc(var(--cursor-size) * 1.8);
+            background: radial-gradient(
+                circle,
+                var(--cursor-color) 0%,
+                transparent 60%
+            );
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: -2;
+            transition: all 0.3s;
+        }
+
+        .dark-mode .cursor::after {
+            width: calc(var(--cursor-size) * 1.5);
+            height: calc(var(--cursor-size) * 1.5);
+            background: radial-gradient(
+                circle,
+                transparent 0%,
+                transparent 30%,
+                var(--cursor-color) 30%,
+                var(--cursor-color) 100%
+            );
+            box-shadow: -5px -5px 0 0 var(--cursor-color);
+            opacity: 0.2;
+        }
+
+        @keyframes rotateOutline {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .cursor.hovered {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .cursor.hovered::before {
+            animation: rotateOutline 1s infinite linear;
+        }
+
+        .cursor.blue {
+            background: var(--primary);
+        }
+        .cursor.yellow {
+            background: var(--highlight);
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 8rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        h4 {
+            font-size: 1.3rem;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+        ul {
+            list-style-position: outside;
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        .highlight {
+            background-color: var(--highlight);
+            padding: 0 0.2em;
+            box-shadow: 3px 0 0 var(--highlight), -3px 0 0 var(--highlight);
+        }
+
+        /* ===== MIXED FONT FOR NAME ===== */
+        .name-container {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .name-mono {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+        }
+
+        .name-italic {
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            margin-left: 0.3em;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: transparent;
+            transition: all 0.5s;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .dark-mode nav.scrolled {
+            background: rgba(26, 26, 26, 0.95);
+            border-bottom: 1px solid var(--dark-gray);
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--highlight);
+            cursor: pointer;
+            font-size: 1.3rem;
+            margin-left: 2rem;
+        }
+
+        /* ===== HERO SECTION ===== */
+        #hero {
+            background: var(--off-white);
+            text-align: left;
+        }
+
+        .dark-mode #hero {
+            background: var(--dark-gray);
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        #skills {
+            background: var(--white);
+        }
+
+        .dark-mode #skills {
+            background: var(--dark);
+        }
+
+        .skills-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: var(--off-white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .skill-category {
+            background: var(--dark-gray);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .skill-category h3 i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-item {
+            background: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--gray);
+            transition: all 0.3s;
+        }
+
+        .dark-mode .skill-item {
+            background: var(--dark);
+            border-color: var(--dark-gray);
+        }
+
+        .skill-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* ===== EXPERIENCE SECTION ===== */
+        #experience {
+            background: var(--off-white);
+        }
+
+        .dark-mode #experience {
+            background: var(--dark-gray);
+        }
+
+        .experience-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .experience-card {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: grab;
+            transition: all 0.3s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .dark-mode .experience-card {
+            background: var(--dark-gray);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-card:active {
+            cursor: grabbing;
+        }
+
+        .experience-card.dragging {
+            z-index: 100;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .experience-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-card .duration {
+            font-style: italic;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .dark-mode .experience-card .duration {
+            color: var(--gray);
+        }
+
+        .experience-card ul {
+            padding-left: 1rem;
+            margin-bottom: 0;
+        }
+
+        .experience-card li {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== PROJECTS SECTION ===== */
+        #projects {
+            background: var(--white);
+        }
+
+        .dark-mode #projects {
+            background: var(--dark);
+        }
+
+        .projects-title {
+            font-size: 2.5rem;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .projects-title:hover {
+            color: var(--primary);
+        }
+
+        .projects-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            height: 350px;
+            background-color: var(--gray);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dark-mode .project-card {
+            background-color: var(--dark-gray);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .project-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .view-project {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: var(--highlight);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .view-project:hover {
+            transform: translateX(5px);
+        }
+
+        /* ===== SOCIAL MEDIA SECTION ===== */
+        #social-media {
+            background: var(--off-white);
+            padding: 8rem 5rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .dark-mode #social-media {
+            background: var(--dark-gray);
+        }
+
+        .social-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .social-item {
+            font-size: 2.5rem;
+            color: var(--dark);
+            transition: all 0.5s ease;
+            position: relative;
+            cursor: pointer;
+            padding: 1rem;
+            z-index: 2;
+            text-decoration: none;
+        }
+
+        .dark-mode .social-item {
+            color: var(--white);
+        }
+
+        .social-item:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .social-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .social-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Zigzag animation classes */
+        .social-item.zigzag-1 { animation: zigzag1 8s infinite alternate; }
+        .social-item.zigzag-2 { animation: zigzag2 7s infinite alternate-reverse; }
+        .social-item.zigzag-3 { animation: zigzag3 9s infinite alternate; }
+        .social-item.zigzag-4 { animation: zigzag4 6s infinite alternate-reverse; }
+        .social-item.zigzag-5 { animation: zigzag1 7.5s infinite alternate; }
+        .social-item.zigzag-6 { animation: zigzag2 8.5s infinite alternate-reverse; }
+        .social-item.zigzag-7 { animation: zigzag3 7s infinite alternate; }
+        .social-item.zigzag-8 { animation: zigzag4 9s infinite alternate-reverse; }
+
+        @keyframes zigzag1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(5deg); }
+            50% { transform: translate(-20px, 20px) rotate(-5deg); }
+            75% { transform: translate(20px, 20px) rotate(5deg); }
+        }
+
+        @keyframes zigzag2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-20px, -20px) rotate(-5deg); }
+            50% { transform: translate(20px, 20px) rotate(5deg); }
+            75% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        @keyframes zigzag3 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, -15px) rotate(3deg); }
+            50% { transform: translate(-15px, 15px) rotate(-3deg); }
+            75% { transform: translate(15px, 15px) rotate(3deg); }
+        }
+
+        @keyframes zigzag4 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-15px, -15px) rotate(-3deg); }
+            50% { transform: translate(15px, 15px) rotate(3deg); }
+            75% { transform: translate(-15px, 15px) rotate(-3deg); }
+        }
+
+        /* Cursor effects */
+        .social-item.blue-hover:hover {
+            color: var(--primary);
+            animation-play-state: paused;
+        }
+
+        .social-item.yellow-hover:hover {
+            color: var(--highlight);
+            animation-play-state: paused;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            section {
+                padding: 6rem 2rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .name-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .name-italic {
+                margin-left: 0;
+                margin-top: 0.3rem;
+            }
+
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-container {
+                grid-template-columns: 1fr;
+            }
+
+            #social-media {
+                padding: 6rem 2rem;
+            }
+            
+            .social-item {
+                font-size: 2rem;
+                padding: 0.8rem;
+            }
+            
+            .social-title {
+                font-size: 2rem;
+            }
+            
+            /* Adjust cursor size for mobile */
+            :root {
+                --cursor-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+  <!-- Navigation -->
+    <nav style="padding: 1.5rem 2rem;">
+        <div class="nav-logo">SH</div>
+        <div class="nav-links" style="gap: 1.5rem; flex-wrap: wrap;">
+            <a href="#skills">Tools</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#social-media">Connect</a>
+            <button class="theme-toggle" style="margin-left: 0;">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section id="hero" style="padding: 6rem 2rem; min-height: auto;">
+        <div class="hero-content">
+            <h1 style="font-size: clamp(2rem, 5vw, 3.5rem);">
+                <span class="name-container">
+                    <span class="name-mono">Hi, I'm Sunni</span>
+                    <span class="name-italic">Hanifah</span>
+                </span>
+            </h1>
+            <p style="font-size: clamp(1rem, 1.2vw, 1.1rem);">I'm a D4 Business Statistics student @ Institut Teknologi Sepuluh Nopember with a passion for blending data analysis with creative problem-solving.</p>
+            <p style="font-size: clamp(1rem, 1.2vw, 1.1rem);">I have honed my skills in project management, graphic design, and data analysis. I have also led teams, gaining valuable insights into UI/UX design and business planning. </p>
+            <p style="font-size: clamp(1rem, 1.2vw, 1.1rem);">My objective is to contribute to innovative projects that leverage my design and business acumen, while continuously learning and growing in a dynamic and collaborative environment.</p>
+        </div>
+    </section>
+
+   <section id="skills" style="padding: 6rem 2rem;">
+        <div class="skills-container">
+            <h2 style="text-align: center; font-size: clamp(1.8rem, 3vw, 2.5rem);">Ma Tools</h2>
+            
+            <div class="skills-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <!-- Column 1 -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-bar"></i> Statistics & Analysis</h3>
+                    <div class="skill-items" style="gap: 0.5rem;">
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">SPSS</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">Minitab</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">R Programming</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">Python</span>
+                    </div>
+                    
+                    <h3 style="margin-top: 1.2rem;"><i class="fas fa-code"></i> Programming</h3>
+                    <div class="skill-items" style="gap: 0.5rem;">
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">JavaScript</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">R Shiny</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">HTML/CSS</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">SQL</span>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-line"></i> Data Visualization</h3>
+                    <div class="skill-items" style="gap: 0.5rem;">
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">Power BI</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">Looker Studio</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">Tableau</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">ggplot2</span>
+                    </div>
+                    
+                    <h3 style="margin-top: 1.2rem;"><i class="fas fa-paint-brush"></i> Design & Tools</h3>
+                    <div class="skill-items" style="gap: 0.5rem;">
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">Figma</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">Canva</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">Adobe Illustrator</span>
+                        <span class="skill-item" style="padding: 0.4rem 0.8rem;">Notion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" style="padding: 6rem 2rem;">
+        <h2 style="font-size: clamp(1.8rem, 3vw, 2.5rem);">What I've done n right now?</h2>
+        
+        <div class="experience-container" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <!-- Experience cards with responsive padding -->
+            <div class="experience-card" draggable="true" style="padding: 1.2rem;">
+                <h3>Olfaction 2025: HIMADATA-ITS</h3>
+                <div class="duration">Jun 2025 - Present</div>
+                <div class="position">Head of Subdivision Infographic</div>
+                <ul>
+                    <li>Designed competition framework for Infographic Olympiad with 150+ participants</li>
+                    <li>Coordinated judging panel of 5 industry professionals and academics</li>
+                    <li>Processed and prepared real-world datasets for competition use</li>
+                    <li>Managed team of 10 staff members to execute event logistics</li>
+                </ul>
+            </div>
+
+            <!-- Other experience cards follow same pattern -->
+            <div class="experience-card" draggable="true" style="padding: 1.2rem;">
+                <h3>HIMADATA-ITS</h3>
+                <div class="duration">Dec 2024 - Present</div>
+                <div class="position">Staff of Bimbingan Prestasi Division</div>
+                <ul>
+                    <li>Researched and identified 20+ relevant competitions for statistics students</li>
+                    <li>Developed and maintained comprehensive competition database</li>
+                    <li>Created resources to help students prepare for case competitions</li>
+                </ul>
+            </div>
+            
+            <div class="experience-card" draggable="true" style="padding: 1.2rem;">
+                <h3>Peta Scholar</h3>
+                <div class="duration">May 2025 - Present</div>
+                <div class="position">Research & Development Staff</div>
+                <ul>
+                    <li>Researched 50+ domestic and international scholarship opportunities</li>
+                    <li>Developed comprehensive guides for application processes</li>
+                    <li>Analyzed scholarship trends and success factors</li>
+                    <li>Created interview preparation materials for applicants</li>
+                </ul>
+            </div>
+            
+            <div class="experience-card" draggable="true" style="padding: 1.2rem;">
+                <h3>Programming Algorithm Assistant</h3>
+                <div class="duration">Sep 2024 - Dec 2024</div>
+                <div class="position">Teaching Assistant</div>
+                <ul>
+                    <li>Conducted weekly programming labs for 30+ students</li>
+                    <li>Developed Python curriculum from intermediate to advanced concepts</li>
+                    <li>Created supplemental materials to help students prepare for exams</li>
+                    <li>Provided one-on-one tutoring for struggling students</li>
+                </ul>
+            </div>
+            
+            <div class="experience-card" draggable="true" style="padding: 1.2rem;">
+                <h3>GERIGI ITS 2024</h3>
+                <div class="duration">Jun 2024 - Aug 2024</div>
+                <div class="position">Secretarial Staff</div>
+                <ul>
+                    <li>Managed data for 20 new students during orientation program</li>
+                    <li>Served as primary mentor for incoming students</li>
+                    <li>Developed peer connection initiatives to improve engagement</li>
+                    <li>Created orientation materials and guides</li>
+                </ul>
+            </div>
+            
+            <div class="experience-card" draggable="true" style="padding: 1.2rem;">
+                <h3>Ini Lho ITSI</h3>
+                <div class="duration">Jan 2024</div>
+                <div class="position">Head of IT</div>
+                <ul>
+                    <li>Managed IT team for high school tryout event with 500+ participants</li>
+                    <li>Developed registration tracking system</li>
+                    <li>Ensured smooth technical operations during event</li>
+                    <li>Created documentation for future event organizers</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" style="padding: 6rem 2rem;">
+        <h2 class="projects-title" style="font-size: clamp(1.8rem, 3vw, 2.5rem); text-align: center;">My Projects</h2>
+        <p class="projects-subtitle" style="text-align: center; font-size: clamp(1rem, 1.2vw, 1.2rem); margin-bottom: 2rem;">Interactive tools, visualizations, and designs I've created</p>
+        
+        <div class="projects-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <!-- Project 1 -->
+            <div class="project-card" style="height: 280px;">
+                <img src="fotoweb/WEBRBOKEM.png" alt="Bokem Calculator" class="project-image">
+                <div class="project-overlay" style="padding: 1rem; text-align: center;">
+                    <h3 class="project-name" style="font-size: clamp(1.2rem, 1.5vw, 1.5rem);">Bokem Calculator</h3>
+                    <p class="project-date" style="font-size: clamp(0.8rem, 1vw, 0.9rem);">June 2025</p>
+                    <p class="project-description" style="font-size: clamp(0.9rem, 1.1vw, 0.95rem); margin: 0.5rem auto; max-width: 90%;">
+                        An interactive R Shiny application for statistical analysis.
+                    </p>
+                    <div class="project-tags" style="justify-content: center; gap: 0.4rem;">
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">R Shiny</span>
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">Statistics</span>
+                    </div>
+                    <a href="https://sunnidashboard.shinyapps.io/Checkbokemkamu/" class="view-project" style="font-size: clamp(0.9rem, 1.1vw, 1rem);">View Project →</a>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card" style="height: 280px;">
+                <img src="fotoweb/weblovecalcu.png" alt="Love Calculator" class="project-image">
+                <div class="project-overlay" style="padding: 1rem; text-align: center;">
+                    <h3 class="project-name" style="font-size: clamp(1.2rem, 1.5vw, 1.5rem);">Love Calculator</h3>
+                    <p class="project-date" style="font-size: clamp(0.8rem, 1vw, 0.9rem);">June 2025</p>
+                    <p class="project-description" style="font-size: clamp(0.9rem, 1.1vw, 0.95rem); margin: 0.5rem auto; max-width: 90%;">
+                        A fun interactive tool that calculates compatibility scores.
+                    </p>
+                    <div class="project-tags" style="justify-content: center; gap: 0.4rem;">
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">R Shiny</span>
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">UI/UX</span>
+                    </div>
+                    <a href="https://apsslucusunni.shinyapps.io/TestingurLovewithu/" class="view-project" style="font-size: clamp(0.9rem, 1.1vw, 1rem);">View Project →</a>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card" style="height: 280px;">
+                <img src="fotoweb/webdorh.jpg" alt="UI/UX Design" class="project-image">
+                <div class="project-overlay" style="padding: 1rem; text-align: center;">
+                    <h3 class="project-name" style="font-size: clamp(1.2rem, 1.5vw, 1.5rem);">EcDorH UI/UX Design</h3>
+                    <p class="project-date" style="font-size: clamp(0.8rem, 1vw, 0.9rem);">Oct - Nov 2024</p>
+                    <p class="project-description" style="font-size: clamp(0.9rem, 1.1vw, 0.95rem); margin: 0.5rem auto; max-width: 90%;">
+                        Complete UI/UX redesign for a campus organization website.
+                    </p>
+                    <div class="project-tags" style="justify-content: center; gap: 0.4rem;">
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">Figma</span>
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">UI/UX</span>
+                   </div>
+                    <a href="https://www.canva.com/design/DAGWmO2oCv8/NdsEsfyfPuWdSSk9HR1mRQ/edit" class="view-project" style="font-size: clamp(0.9rem, 1.1vw, 1rem);">View Project →</a>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="project-card" style="height: 280px;">
+                <img src="fotoweb/webbooksaniest.png" alt="Bookstore Prototype" class="project-image">
+                <div class="project-overlay" style="padding: 1rem; text-align: center;">
+                    <h3 class="project-name" style="font-size: clamp(1.2rem, 1.5vw, 1.5rem);">Bookstore Prototype</h3>
+                    <p class="project-date" style="font-size: clamp(0.8rem, 1vw, 0.9rem);">June - July 2024</p>
+                    <p class="project-description" style="font-size: clamp(0.9rem, 1.1vw, 0.95rem); margin: 0.5rem auto; max-width: 90%;">
+                        A functional bookstore website prototype with inventory management.
+                    </p>
+                    <div class="project-tags" style="justify-content: center; gap: 0.4rem;">
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">HTML/CSS</span>
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">JavaScript</span>
+                    </div>
+                    <a href="https://sunnihn.github.io/booksaniest/index.html" class="view-project" style="font-size: clamp(0.9rem, 1.1vw, 1rem);">View Project →</a>
+                </div>
+            </div>
+            
+            <!-- Project 5 -->
+            <div class="project-card" style="height: 280px;">
+                <img src="fotoweb/infografis.png" alt="Infographic" class="project-image">
+                <div class="project-overlay" style="padding: 1rem; text-align: center;">
+                    <h3 class="project-name" style="font-size: clamp(1.2rem, 1.5vw, 1.5rem);">Employment in Indonesia</h3>
+                    <p class="project-date" style="font-size: clamp(0.8rem, 1vw, 0.9rem);">Nov - Dec 2024</p>
+                    <p class="project-description" style="font-size: clamp(0.9rem, 1.1vw, 0.95rem); margin: 0.5rem auto; max-width: 90%;">
+                        Data visualization analyzing employment trends across provinces.
+                    </p>
+                    <div class="project-tags" style="justify-content: center; gap: 0.4rem;">
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">Data Viz</span>
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">Infographic</span>
+                    </div>
+                    <a href="https://www.canva.com/design/DAGZ1Z3JbaI/PM28POQjtd5PqPHrCk7DMQ/edit" class="view-project" style="font-size: clamp(0.9rem, 1.1vw, 1rem);">View Project →</a>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card" style="height: 280px;">
+                <img src="fotoweb/etc.png" alt="Other Projects" class="project-image">
+                <div class="project-overlay" style="padding: 1rem; text-align: center;">
+                    <h3 class="project-name" style="font-size: clamp(1.2rem, 1.5vw, 1.5rem);">Other Projects</h3>
+                    <p class="project-date" style="font-size: clamp(0.8rem, 1vw, 0.9rem);">Ongoing</p>
+                    <p class="project-description" style="font-size: clamp(0.9rem, 1.1vw, 0.95rem); margin: 0.5rem auto; max-width: 90%;">
+                        Collection of smaller projects including SQL and data analysis.
+                    </p>
+                    <div class="project-tags" style="justify-content: center; gap: 0.4rem;">
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">SQL</span>
+                        <span class="project-tag" style="padding: 0.2rem 0.6rem; font-size: clamp(0.7rem, 0.9vw, 0.8rem);">Excel</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/u/1/folders/13YbmHbd9k-hqUJFSY7D_7zxX3dHXXd4b" class="view-project" style="font-size: clamp(0.9rem, 1.1vw, 1rem);">View Projects →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section - Made visible on mobile -->
+    <section id="social-media" style="padding: 6rem 2rem; min-height: auto;">
+        <h2 class="social-title" style="font-size: clamp(1.8rem, 3vw, 2.5rem);">Let's Connect</h2>
+        <p style="text-align: center; margin-bottom: 2rem; font-size: clamp(1rem, 1.2vw, 1.1rem);">u can reach up me or just to say hello!</p>
+        <div class="social-container" style="gap: 1.5rem; padding: 1rem 0;">
+            <a href="https://www.linkedin.com/in/sunni-hanifah/" class="social-item blue-hover zigzag-1" style="font-size: clamp(1.8rem, 2.5vw, 2.5rem); padding: 0.8rem;"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/sunnihn/" class="social-item yellow-hover zigzag-2" style="font-size: clamp(1.8rem, 2.5vw, 2.5rem); padding: 0.8rem;"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/sunnihn" class="social-item blue-hover zigzag-3" style="font-size: clamp(1.8rem, 2.5vw, 2.5rem); padding: 0.8rem;"><i class="fab fa-github"></i></a>
+            <a href="mailto:sunnihanifah6@gmail.com" class="social-item yellow-hover zigzag-8" style="font-size: clamp(1.8rem, 2.5vw, 2.5rem); padding: 0.8rem;"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.facebook.com/sunni.hanifah" class="social-item blue-hover zigzag-5" style="font-size: clamp(1.8rem, 2.5vw, 2.5rem); padding: 0.8rem;"><i class="fab fa-facebook"></i></a>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Dark Mode Toggle with localStorage
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover effects
+        const interactiveElements = [
+            ...document.querySelectorAll('a'),
+            ...document.querySelectorAll('button'),
+            ...document.querySelectorAll('.highlight'),
+            ...document.querySelectorAll('.projects-title'),
+            ...document.querySelectorAll('.project-card'),
+            ...document.querySelectorAll('.experience-card'),
+            ...document.querySelectorAll('.social-item'),
+            ...document.querySelectorAll('.skill-item')
+        ];
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hovered');
+                
+                if (el.classList.contains('blue-hover')) {
+                    cursor.classList.add('blue');
+                } else if (el.classList.contains('yellow-hover')) {
+                    cursor.classList.add('yellow');
+                }
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hovered', 'blue', 'yellow');
+            });
+        });
+
+        // Scroll animations
+        const sections = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                document.querySelector('nav').classList.add('scrolled');
+            } else {
+                document.querySelector('nav').classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Experience Cards Drag and Double Click
+        const experienceCards = document.querySelectorAll('.experience-card');
+        let isDragging = false;
+        let startX, startY;
+        let originalPositions = [];
+
+        experienceCards.forEach((card, index) => {
+            const rect = card.getBoundingClientRect();
+            originalPositions[index] = {
+                left: rect.left,
+                top: rect.top,
+                parent: card.parentNode,
+                nextSibling: card.nextSibling
+            };
+        });
+
+        experienceCards.forEach((card, index) => {
+            card.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                card.classList.add('dragging');
+                startX = e.clientX - card.getBoundingClientRect().left;
+                startY = e.clientY - card.getBoundingClientRect().top;
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const card = document.querySelector('.dragging');
+                if (card) {
+                    card.style.position = 'absolute';
+                    card.style.left = `${e.clientX - startX}px`;
+                    card.style.top = `${e.clientY - startY}px`;
+                }
+            });
+
+            document.addEventListener('mouseup', (e) => {
+                if (isDragging) {
+                    isDragging = false;
+                    const card = document.querySelector('.dragging');
+                    if (card) {
+                        card.classList.remove('dragging');
+                    }
+                }
+            });
+
+            card.addEventListener('dblclick', (e) => {
+                const originalPos = originalPositions[index];
+                card.style.transition = 'all 0.5s ease';
+                card.style.position = 'static';
+                
+                if (originalPos.nextSibling) {
+                    originalPos.parent.insertBefore(card, originalPos.nextSibling);
+                } else {
+                    originalPos.parent.appendChild(card);
+                }
+                
+                setTimeout(() => {
+                    card.style.transition = '';
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

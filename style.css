@@ -1,0 +1,171 @@
+/* ===== GLOBAL ===== */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --green: #00ff00;
+  --gray: #f5f5f5;
+  --dark-gray: #1a1a1a;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.6;
+  margin: 0;
+  transition: background 0.3s, color 0.3s;
+}
+
+.dark-mode {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3 {
+  font-weight: 300;
+  letter-spacing: -0.5px;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: var(--green);
+  margin-top: 1rem;
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed;
+  width: 100%;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  border-bottom: 1px solid var(--black);
+  z-index: 100;
+}
+
+.dark-mode nav {
+  background: var(--black);
+  border-color: var(--white);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--green);
+}
+
+/* ===== HERO SECTION ===== */
+#hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  border-bottom: 1px solid var(--black);
+}
+
+.dark-mode #hero {
+  border-color: var(--white);
+}
+
+.hero-content h1 {
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 6rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--gray);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--black);
+}
+
+.dark-mode .card {
+  background: var(--dark-gray);
+  border-color: var(--white);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.dark-mode .btn {
+  background: var(--white);
+  color: var(--black);
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--black);
+}
+
+.dark-mode .btn:hover {
+  color: var(--white);
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--green);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  mix-blend-mode: difference;
+  transition: transform 0.2s;
+}
+
+/* ===== DARK MODE TOGGLE ===== */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+}

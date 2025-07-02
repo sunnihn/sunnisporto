@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunni Hanifah | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004080;
+            --highlight: #fffb00;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --dark: #1a1a1a;
+            --gray: #e6e6e6;
+            --dark-gray: #333333;
+        }
+
+        /* ===== BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            color: var(--dark);
+            background-color: var(--white);
+            line-height: 1.8;
+            text-align: justify;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        .dark-mode {
+            background-color: var(--dark);
+            color: var(--white);
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 8rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* ===== EXPERIENCE GRID ===== */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .experience-card {
+            background: var(--off-white);
+            border: 2px solid var(--gray);
+            border-radius: 8px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark-mode .experience-card {
+            background: var(--dark-gray);
+            border-color: var(--dark-gray);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .experience-card.active {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) !important;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            background: var(--primary-dark);
+            color: var(--white);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 100vmax rgba(0,0,0,0.8);
+        }
+
+        .experience-card.active .experience-org,
+        .experience-card.active .experience-position,
+        .experience-card.active .experience-duration {
+            color: var(--white);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .experience-org {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .experience-duration {
+            color: var(--dark-gray);
+            font-style: italic;
+        }
+
+        .dark-mode .experience-duration {
+            color: var(--gray);
+        }
+
+        .experience-position {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .dark-mode .experience-position {
+            color: var(--white);
+        }
+
+        .experience-card ul {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .experience-card li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            section {
+                padding: 6rem 2rem;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-card.active {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2>Professional Experience</h2>
+        
+        <div class="experience-grid">
+            <!-- Experience 1 -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-org">HIMADATA-ITS</div>
+                    <div class="experience-duration">1 year 1 month</div>
+                </div>
+                
+                <div class="experience-position">Olfaction: Head of Subdivision Infographic: Material and Methods</div>
+                <div class="experience-duration">Jun 2025 - Present · 1 month</div>
+                <ul>
+                    <li>Designed the framework and concept for an Infographic Olympiad.</li>
+                    <li>Recruited and coordinated judges.</li>
+                    <li>Processed real-case datasets.</li>
+                    <li>Coordinator team.</li>
+                </ul>
+                
+                <div class="experience-position">Staff of Bimbingan Prestasi Div</div>
+                <div class="experience-duration">Dec 2024 - Present · 7 months</div>
+                <ul>
+                    <li>Proactively research and identify potential competitions (e.g., data analysis challenges, statistical modeling contests, case competitions) suitable for Business Statistics students.</li>
+                    <li>Gather detailed information on competition requirements, deadlines, eligibility criteria, prizes, and registration procedures.</li>
+                    <li>Maintain an updated database of competitions, categorized by type, focus area, and student skill level.</li>
+                    <li>Evaluate the quality and relevance of competitions to ensure they align with students' academic and career goals.</li>
+                </ul>
+            </div>
+            
+            <!-- Experience 2 -->
+            <div class="experience-card">
+                <div class="experience-position">Olfaction: JC: Material and Methods</div>
+                <div class="experience-duration">Jun 2024 - Nov 2024 · 6 months</div>
+                <ul>
+                    <li>Developed competition-level questions for a Statistics Olympiad, covering mathematical and statistical concepts.</li>
+                    <li>Analyzed real-world data to produce infographics, translating complex findings into clear visual presentations.</li>
+                    <li>Consulted with professors to refine problems and verify methodological correctness.</li>
+                </ul>
+            </div>
+            
+            <!-- Experience 3 -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-org">Peta Scholar</div>
+                    <div class="experience-duration">May 2025 - Present · 2 months</div>
+                </div>
+                <div class="experience-position">Staff of RnD</div>
+                <ul>
+                    <li>Research domestic/international scholarships and eligibility criteria.</li>
+                    <li>Compile and update scholarship databases (deadlines, requirements, benefits).</li>
+                    <li>Analyze trends in scholarship opportunities and applicant success rates.</li>
+                    <li>Develop guides for applications, essays, and interviews.</li>
+                </ul>
+            </div>
+            
+            <!-- Experience 4 -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-org">Heroes Day Esports</div>
+                    <div class="experience-duration">Jan 2025 - Present · 6 months</div>
+                </div>
+                <div class="experience-position">Head of Subdivision Sponsorships</div>
+                <ul>
+                    <li>Lead sponsorship strategy and partnership acquisition.</li>
+                    <li>Manage sponsor relations and negotiate collaboration terms.</li>
+                    <li>Develop sponsorship proposals and funding plans.</li>
+                    <li>Coordinate with marketing/events teams for sponsor visibility.</li>
+                    <li>Track sponsorship deliverables and ensure fulfillment.</li>
+                </ul>
+            </div>
+            
+            <!-- Experience 5 -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-org">GDGoC ITS</div>
+                    <div class="experience-duration">Nov 2024 - Present · 8 months</div>
+                </div>
+                <div class="experience-position">Business Development: Sponsorship</div>
+                <ul>
+                    <li>Establish strategic partnerships to support GDSC ITS programs and growth.</li>
+                    <li>Secure financial backing, resources, and opportunities through sponsor collaborations.</li>
+                    <li>Foster mutually beneficial relationships to ensure organizational sustainability.</li>
+                    <li>Maintain long-term sponsor relations via updates, reports, and recognition.</li>
+                    <li>Offer sponsors branding opportunities and event engagement.</li>
+                    <li>Align sponsorship packages with GDSC ITS and sponsor needs.</li>
+                </ul>
+            </div>
+            
+            <!-- Experience 6 -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-org">Institut Teknologi Sepuluh Nopember (ITS)</div>
+                    <div class="experience-duration">Sep 2024 - Dec 2024 · 4 months</div>
+                </div>
+                <div class="experience-position">Assistant lecturer of Programming Algorithm</div>
+                <ul>
+                    <li>Teach weekly Programming Algorithm course following curriculum standards.</li>
+                    <li>Deliver Python lessons (intermediate → advanced) for exam preparation.</li>
+                    <li>Start instruction early to give students an advantage.</li>
+                </ul>
+            </div>
+            
+            <!-- Experience 7 -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-org">GERIGI ITS 2024</div>
+                    <div class="experience-duration">Jun 2024 - Aug 2024 · 3 months</div>
+                </div>
+                <div class="experience-position">Staff of Secretarial: Kestari</div>
+                <ul>
+                    <li>Recorded and managed data for 20 new students.</li>
+                    <li>Organized/summarized student assessments.</li>
+                    <li>Served as LO for communication and support.</li>
+                    <li>Motivated and guided new students through university integration.</li>
+                    <li>Acted as primary contact to build peer connections.</li>
+                    <li>Fostered supportive relationships to enhance student engagement.</li>
+                </ul>
+            </div>
+            
+            <!-- Experience 8 -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-org">Ini Lho ITSI</div>
+                    <div class="experience-duration">Jan 2024 - Jan 2024 · 1 month</div>
+                </div>
+                <div class="experience-position">LAROS ITS: Head of IT</div>
+                <ul>
+                    <li>Coordinate and manage the IT team to ensure efficient technical support and seamless event operations.</li>
+                    <li>Meticulously documented high school student registrations for ITS tryouts to streamline processes and maintain data accuracy.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Experience card interaction
+        const experienceCards = document.querySelectorAll('.experience-card');
+        let activeCard = null;
+
+        experienceCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Prevent triggering when clicking links inside the card
+                if (e.target.tagName === 'A') return;
+                
+                // If this card is already active, deactivate it
+                if (this === activeCard) {
+                    this.classList.remove('active');
+                    activeCard = null;
+                    return;
+                }
+                
+                // Deactivate any currently active card
+                if (activeCard) {
+                    activeCard.classList.remove('active');
+                }
+                
+                // Activate this card
+                this.classList.add('active');
+                activeCard = this;
+            });
+        });
+
+        // Close active card when clicking outside
+        document.addEventListener('click', function(e) {
+            if (activeCard && !activeCard.contains(e.target) && !e.target.classList.contains('experience-card')) {
+                activeCard.classList.remove('active');
+                activeCard = null;
+            }
+        });
+
+        // Dark Mode Toggle with localStorage
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // Scroll animations
+        const sections = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
